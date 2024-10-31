@@ -14,7 +14,6 @@ spec:
   components:
     - name: web
       dockerfileName: web.Dockerfile
-
       ports:
         - name: http
           port: 8000
@@ -24,16 +23,14 @@ spec:
         requests:
           cpu: 10m
           memory: 20M
-
       variables:
         MESSAGE_ENV_VAR: Hello DeepNet!
         API_URL: https://api-rihag-demo-app-dev.dev.radix.equinor.com
-      #secrets:
-      #  - SECRET_ENV_VAR
+      secrets:
+       - SECRET_ENV_VAR
 
     - name: api
       dockerfileName: api.Dockerfile
-
       ports:
         - name: http
           port: 8001

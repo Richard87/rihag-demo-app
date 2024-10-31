@@ -1,5 +1,15 @@
 # Radix Demo App
 
+A simple web and api app as a radix quick start tutorial
+
+## Topics:
+- Registering a Application in Radix
+- Github Deploykey and Webhooks
+- Variables and Secrets
+- Public and Internal communication
+- Monitoring
+
+## Running locally
 Run the applications:
 ```shell
 go run ./api

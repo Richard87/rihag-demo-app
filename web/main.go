@@ -27,18 +27,17 @@ func main() {
 }
 
 func HelloWorld(w http.ResponseWriter, _ *http.Request) {
-	// message = os.Getenv("MESSAGE_ENV_VAR")
-	// secret := os.Getenv("SECRET_ENV_VAR")
+	message := os.Getenv("MESSAGE_ENV_VAR")
+	secret := os.Getenv("SECRET_ENV_VAR")
 
 	_, _ = fmt.Fprintf(w, "Hello world!!!\n")
-	// _, _ = fmt.Fprintf(w, "Message: %s\n", message)
-	// _, _ = fmt.Fprintf(w, "Secret: %s\n", secret)
+	_, _ = fmt.Fprintf(w, "Message: %s\n", message)
+	_, _ = fmt.Fprintf(w, "Secret: %s\n", secret)
 
 	log.Info().Msg("Handled request")
 }
 
 func HelloApi(w http.ResponseWriter, _ *http.Request) {
-	log.Info().Msg("Handled request")
 	apiUrl := os.Getenv("API_URL")
 
 	response, err := http.Get(apiUrl + "/api")
@@ -47,6 +46,7 @@ func HelloApi(w http.ResponseWriter, _ *http.Request) {
 		_, _ = fmt.Fprintf(w, err.Error())
 		return
 	}
+	_, _ = fmt.Fprintf(w, "Fetched data from %s\n", apiUrl)
 
 	body := make([]byte, response.ContentLength)
 	_, _ = response.Body.Read(body)
@@ -61,4 +61,5 @@ func HelloApi(w http.ResponseWriter, _ *http.Request) {
 
 	_, _ = fmt.Fprintf(w, "Hello world!!!\n")
 	_, _ = fmt.Fprintf(w, responseBody.Message)
+	log.Info().Msg("Handled request")
 }
