@@ -2,8 +2,8 @@
 
 Run the applications:
 ```shell
-go run api/.
-go run web/.
+go run ./api
+go run ./web
 ```
 
 Test the responses:

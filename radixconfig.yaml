@@ -3,7 +3,7 @@
 apiVersion: radix.equinor.com/v1
 kind: RadixApplication
 metadata:
-  name: radix-demo-app
+  name: rihag-demo-app
 spec:
   environments:
     - name: dev
@@ -32,3 +32,18 @@ spec:
       #secrets:
       #  - SECRET_ENV_VAR
 
+
+  components:
+    - name: api
+      src: ./api
+      dockerfileName: Dockerfile
+
+      ports:
+        - name: http
+          port: 8001
+      publicPort: http
+      readOnlyFileSystem: true
+      resources:
+        requests:
+          cpu: 10m
+          memory: 20M
