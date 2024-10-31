@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/equinor/radix-operator/release/json-schema/radixapplication.json
+
+apiVersion: radix.equinor.com/v1
+kind: RadixApplication
+metadata:
+  name: radix-demo-app
+spec:
+  environments:
+    - name: dev
+      build:
+        from: main
+  build:
+    useBuildKit: true
+  components:
+    - name: web
+      src: ./web
+      dockerfileName: Dockerfile
+
+      ports:
+        - name: http
+          port: 8000
+      publicPort: http
+      readOnlyFileSystem: true
+      resources:
+        requests:
+          cpu: 10m
+          memory: 20M
+
+      variables:
+        MESSAGE_ENV_VAR: Hello DeepNet!
+      #  API_HOSTNAME: http://*:5000
+      #secrets:
+      #  - SECRET_ENV_VAR
+
