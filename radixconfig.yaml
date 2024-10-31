@@ -9,8 +9,10 @@ spec:
     - name: dev
       build:
         from: main
+
   build:
     useBuildKit: true
+
   components:
     - name: web
       dockerfileName: web.Dockerfile
