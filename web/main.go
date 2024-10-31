@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
@@ -38,26 +39,26 @@ func HelloWorld(w http.ResponseWriter, _ *http.Request) {
 
 func HelloApi(w http.ResponseWriter, _ *http.Request) {
 	log.Info().Msg("Handled request")
-	hostname := "localhost:8001"
-	// hostname = os.Getenv("API_HOSTNAME")
+	apiUrl := os.Getenv("API_HOSTNAME")
 
-	response, err := http.Get(fmt.Sprintf("http://%s/api", hostname))
+	response, err := http.Get(apiUrl + "/api")
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		_, _ = w.Write([]byte(err.Error()))
+		_, _ = fmt.Fprintf(w, err.Error())
 		return
 	}
 
-	body := make([]byte, 1024)
-	length, _ := response.Body.Read(body)
+	body := make([]byte, response.ContentLength)
+	_, _ = response.Body.Read(body)
 
 	var responseBody Response
-	err = json.Unmarshal(body[:length], &responseBody)
+	err = json.Unmarshal(body, &responseBody)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte(err.Error()))
 		return
 	}
 
-	_, _ = w.Write([]byte(responseBody.Message))
+	_, _ = fmt.Fprintf(w, "Hello world!!!\n")
+	_, _ = fmt.Fprintf(w, responseBody.Message)
 }

@@ -27,12 +27,10 @@ spec:
 
       variables:
         MESSAGE_ENV_VAR: Hello DeepNet!
-      #  API_HOSTNAME: http://*:5000
+        API_URL: https://api-rihag-demo-app-dev.dev.radix.equinor.com
       #secrets:
       #  - SECRET_ENV_VAR
 
-
-  components:
     - name: api
       dockerfileName: api.Dockerfile
 
