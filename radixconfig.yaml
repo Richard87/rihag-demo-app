@@ -27,7 +27,7 @@ spec:
           memory: 20M
       variables:
         MESSAGE_ENV_VAR: Hello DeepNet!
-        API_URL: https://api-rihag-demo-app-dev.dev.radix.equinor.com
+        API_URL: https://api-rihag-demo-app-dev.playground.radix.equinor.com
 #      secrets:
 #       - SECRET_ENV_VAR
 
