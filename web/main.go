@@ -2,12 +2,11 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
-
-	"github.com/rs/zerolog"
-	"github.com/rs/zerolog/log"
 )
 
 type Response struct {
@@ -15,15 +14,17 @@ type Response struct {
 }
 
 func main() {
-	log.Logger = log.Output(zerolog.NewConsoleWriter())
-	log.Info().Msg("Starting listening on http://localhost:8000/...")
-	log.Info().Msg("Starting listening on http://localhost:8000/test-api...")
+	log.Print("Starting listening on http://localhost:8000/...")
+	log.Print("Starting listening on http://localhost:8000/test-api...")
 
 	http.HandleFunc("/", HelloWorld)
 	http.HandleFunc("/test-api", HelloApi)
 	err := http.ListenAndServe(":8000", nil)
+	if err != nil && !errors.Is(err, http.ErrServerClosed) {
+		log.Fatal(err)
+	}
 
-	log.Err(err).Msg("Completed.")
+	log.Print("Completed.")
 }
 
 func HelloWorld(w http.ResponseWriter, _ *http.Request) {
@@ -34,7 +35,7 @@ func HelloWorld(w http.ResponseWriter, _ *http.Request) {
 	_, _ = fmt.Fprintf(w, "Message: %s\n", message)
 	_, _ = fmt.Fprintf(w, "Secret: %s\n", secret)
 
-	log.Info().Msg("Handled request")
+	log.Print("Handled request")
 }
 
 func HelloApi(w http.ResponseWriter, _ *http.Request) {
@@ -61,5 +62,5 @@ func HelloApi(w http.ResponseWriter, _ *http.Request) {
 
 	_, _ = fmt.Fprintf(w, "Hello world!!!\n")
 	_, _ = fmt.Fprintf(w, responseBody.Message)
-	log.Info().Msg("Handled request")
+	log.Print("Handled request")
 }
