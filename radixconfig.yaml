@@ -31,14 +31,14 @@ spec:
       secrets:
        - SECRET_ENV_VAR
 
-#    - name: api
-#      dockerfileName: api.Dockerfile
-#      ports:
-#        - name: http
-#          port: 8001
-#      publicPort: http
-#      readOnlyFileSystem: true
-#      resources:
-#        requests:
-#          cpu: 10m
-#          memory: 20M
+    - name: api
+      dockerfileName: api.Dockerfile
+      ports:
+        - name: http
+          port: 8001
+      publicPort: http
+      readOnlyFileSystem: true
+      resources:
+        requests:
+          cpu: 10m
+          memory: 20M
