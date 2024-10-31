@@ -8,7 +8,9 @@ WORKDIR /src
 
 COPY ./go.mod ./go.sum ./
 RUN go mod download
-COPY . ./
+
+WORKDIR /src/api
+COPY ./web ./
 
 RUN go build -ldflags="-s -w" -o /web
 

@@ -13,8 +13,7 @@ spec:
     useBuildKit: true
   components:
     - name: web
-      src: ./web
-      dockerfileName: Dockerfile
+      dockerfileName: web.Dockerfile
 
       ports:
         - name: http
@@ -35,8 +34,7 @@ spec:
 
   components:
     - name: api
-      src: ./api
-      dockerfileName: Dockerfile
+      dockerfileName: api.Dockerfile
 
       ports:
         - name: http
