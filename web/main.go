@@ -25,22 +25,18 @@ func main() {
 	log.Err(err).Msg("Completed.")
 }
 
-func HelloWorld(w http.ResponseWriter, r *http.Request) {
-	message := "Hello Radix!!!"
-	secret := "hardcoded secret"
-
-	// secret = os.Getenv("SECRET_ENV_VAR")
+func HelloWorld(w http.ResponseWriter, _ *http.Request) {
 	// message = os.Getenv("MESSAGE_ENV_VAR")
+	// secret := os.Getenv("SECRET_ENV_VAR")
 
-	w.WriteHeader(http.StatusOK)
-	_, _ = w.Write([]byte("Hello World"))
-	_, _ = w.Write([]byte(message))
-	_, _ = w.Write([]byte(secret))
+	_, _ = fmt.Fprintf(w, "Hello world!!!\n")
+	// _, _ = fmt.Fprintf(w, "Message: %s\n", message)
+	// _, _ = fmt.Fprintf(w, "Secret: %s\n", secret)
 
 	log.Info().Msg("Handled request")
 }
 
-func HelloApi(w http.ResponseWriter, r *http.Request) {
+func HelloApi(w http.ResponseWriter, _ *http.Request) {
 	log.Info().Msg("Handled request")
 	hostname := "localhost:8001"
 	// hostname = os.Getenv("API_HOSTNAME")
