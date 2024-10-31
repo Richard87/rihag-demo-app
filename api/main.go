@@ -23,11 +23,11 @@ func main() {
 	log.Print("Completed.")
 }
 
-func HelloAPI(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Add("Content-Type", "application/json")
+func HelloAPI(response http.ResponseWriter, _ *http.Request) {
+	response.Header().Add("Content-Type", "application/json")
 
 	content, _ := json.Marshal(Response{Message: "hello from API!"})
-	_, _ = w.Write(content)
+	response.Write(content)
 
 	log.Print("Handled request")
 }

@@ -17,8 +17,8 @@ func main() {
 	log.Print("Starting listening on http://localhost:8000/...")
 	log.Print("Starting listening on http://localhost:8000/test-api...")
 
-	http.HandleFunc("/", HelloWorld)
-	http.HandleFunc("/test-api", HelloApi)
+	http.HandleFunc("/", HelloWorldHandler)
+	http.HandleFunc("/test-api", HelloApiHandler)
 	err := http.ListenAndServe(":8000", nil)
 	if err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)
@@ -27,40 +27,41 @@ func main() {
 	log.Print("Completed.")
 }
 
-func HelloWorld(w http.ResponseWriter, _ *http.Request) {
+func HelloWorldHandler(response http.ResponseWriter, _ *http.Request) {
 	message := os.Getenv("MESSAGE_ENV_VAR")
 	secret := os.Getenv("SECRET_ENV_VAR")
 
-	_, _ = fmt.Fprintf(w, "Hello world!!!\n")
-	_, _ = fmt.Fprintf(w, "Message: %s\n", message)
-	_, _ = fmt.Fprintf(w, "Secret: %s\n", secret)
+	response.Write([]byte(fmt.Sprintf("Hello world!!!\n")))
+	response.Write([]byte(fmt.Sprintf("Message: %s\n", message)))
+	response.Write([]byte(fmt.Sprintf("Secret: %s\n", secret)))
 
 	log.Print("Handled request")
 }
 
-func HelloApi(w http.ResponseWriter, _ *http.Request) {
+func HelloApiHandler(response http.ResponseWriter, _ *http.Request) {
 	apiUrl := os.Getenv("API_URL")
 
-	response, err := http.Get(apiUrl + "/api")
+	apiResponse, err := http.Get(apiUrl + "/api")
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		_, _ = fmt.Fprintf(w, err.Error())
+		response.WriteHeader(http.StatusInternalServerError)
+		response.Write([]byte(err.Error()))
 		return
 	}
-	_, _ = fmt.Fprintf(w, "Fetched data from %s\n", apiUrl)
 
-	body := make([]byte, response.ContentLength)
-	_, _ = response.Body.Read(body)
+	response.Write([]byte(fmt.Sprintf("Fetched data from %s\n", apiUrl)))
+
+	body := make([]byte, apiResponse.ContentLength)
+	_, _ = apiResponse.Body.Read(body)
 
 	var responseBody Response
 	err = json.Unmarshal(body, &responseBody)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		_, _ = w.Write([]byte(err.Error()))
+		response.WriteHeader(http.StatusInternalServerError)
+		response.Write([]byte(err.Error()))
 		return
 	}
 
-	_, _ = fmt.Fprintf(w, "Hello world!!!\n")
-	_, _ = fmt.Fprintf(w, responseBody.Message)
+	response.Write([]byte(fmt.Sprintf("Hello world!!!\n")))
+	response.Write([]byte(fmt.Sprintf("Response from API: %s\n", responseBody.Message)))
 	log.Print("Handled request")
 }
