@@ -39,7 +39,7 @@ func HelloWorld(w http.ResponseWriter, _ *http.Request) {
 
 func HelloApi(w http.ResponseWriter, _ *http.Request) {
 	log.Info().Msg("Handled request")
-	apiUrl := os.Getenv("API_HOSTNAME")
+	apiUrl := os.Getenv("API_URL")
 
 	response, err := http.Get(apiUrl + "/api")
 	if err != nil {
