@@ -7,7 +7,7 @@ A simple web and api app as a radix quick start tutorial
 - Github Deploykey and Webhooks
 - Variables and Secrets
 - Public and Internal communication
-- Monitoring
+- Bonus: Monitoring
 
 ## Running locally
 Run the applications:
