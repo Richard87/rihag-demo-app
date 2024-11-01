@@ -51,6 +51,7 @@ func HelloApiHandler(response http.ResponseWriter, _ *http.Request) {
 	if err != nil {
 		response.WriteHeader(http.StatusInternalServerError)
 		response.Write([]byte(err.Error()))
+		log.Printf("Error caling API: %v", err.Error())
 		return
 	}
 
@@ -64,6 +65,7 @@ func HelloApiHandler(response http.ResponseWriter, _ *http.Request) {
 	if err != nil {
 		response.WriteHeader(http.StatusInternalServerError)
 		response.Write([]byte(err.Error()))
+		log.Printf("Error parsing API response: %v", err.Error())
 		return
 	}
 
