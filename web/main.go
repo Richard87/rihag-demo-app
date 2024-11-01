@@ -13,7 +13,15 @@ type Response struct {
 	Message string `json:"message"`
 }
 
+var message = os.Getenv("MESSAGE_ENV_VAR")
+var secret = os.Getenv("SECRET_ENV_VAR")
+var apiUrl = os.Getenv("API_URL")
+
 func main() {
+	log.Print("Starting...")
+	log.Printf("Config: MESSAGE_ENV_VAR: %s", message)
+	log.Printf("Config: SECRET_ENV_VAR: %s", secret)
+	log.Printf("Config: API_URL: %s", apiUrl)
 	log.Print("Starting listening on http://localhost:8000/...")
 	log.Print("Starting listening on http://localhost:8000/test-api...")
 
@@ -28,8 +36,6 @@ func main() {
 }
 
 func HelloWorldHandler(response http.ResponseWriter, _ *http.Request) {
-	message := os.Getenv("MESSAGE_ENV_VAR")
-	secret := os.Getenv("SECRET_ENV_VAR")
 
 	response.Write([]byte(fmt.Sprintf("Hello world!!!\n")))
 	response.Write([]byte(fmt.Sprintf("Message: %s\n", message)))
@@ -51,7 +57,7 @@ func HelloApiHandler(response http.ResponseWriter, _ *http.Request) {
 	response.Write([]byte(fmt.Sprintf("Fetched data from %s\n", apiUrl)))
 
 	body := make([]byte, apiResponse.ContentLength)
-	_, _ = apiResponse.Body.Read(body)
+	apiResponse.Body.Read(body)
 
 	var responseBody Response
 	err = json.Unmarshal(body, &responseBody)
