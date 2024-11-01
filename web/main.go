@@ -45,8 +45,6 @@ func HelloWorldHandler(response http.ResponseWriter, _ *http.Request) {
 }
 
 func HelloApiHandler(response http.ResponseWriter, _ *http.Request) {
-	apiUrl := os.Getenv("API_URL")
-
 	apiResponse, err := http.Get(apiUrl + "/api")
 	if err != nil {
 		response.WriteHeader(http.StatusInternalServerError)
