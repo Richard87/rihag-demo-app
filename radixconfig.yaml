@@ -26,7 +26,7 @@ spec:
           cpu: 10m
           memory: 20M
       variables:
-        MESSAGE_ENV_VAR: Hello DeepNet!
+        MESSAGE_ENV_VAR: Hello EDC!
         API_URL: https://api-rihag-demo-app-dev.playground.radix.equinor.com
       secrets:
       - SECRET_ENV_VAR
