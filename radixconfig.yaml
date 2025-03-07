@@ -21,7 +21,7 @@ spec:
           port: 8000
       publicPort: http
       variables:
-        MESSAGE_ENV_VAR: Hello EDC!
+        MESSAGE_ENV_VAR: Hello Bergen!
         API_URL: https://api-rihag-demo-app-dev.playground.radix.equinor.com
       secrets:
       - SECRET_ENV_VAR
