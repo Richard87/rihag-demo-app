@@ -17,15 +17,16 @@ var secret = os.Getenv("SECRET_ENV_VAR")
 var apiUrl = os.Getenv("API_URL")
 
 func main() {
-	log.Print("Starting...")
+	log.Printf("Starting...")
 	log.Printf("Config: MESSAGE_ENV_VAR: %s", message)
 	log.Printf("Config: SECRET_ENV_VAR: %s", secret)
 	log.Printf("Config: API_URL: %s", apiUrl)
-	log.Print("Starting listening on http://localhost:8000/...")
-	log.Print("Starting listening on http://localhost:8000/test-api...")
+	log.Printf("Starting listening on http://localhost:8000/...")
+	log.Printf("Starting listening on http://localhost:8000/test-api...")
 
 	http.HandleFunc("/", HelloWorldHandler)
 	http.HandleFunc("/test-api", HelloApiHandler)
+
 	err := http.ListenAndServe(":8000", nil)
 	if err != nil && !errors.Is(err, http.ErrServerClosed) {
 		log.Fatal(err)
