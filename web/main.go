@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -46,28 +45,15 @@ func HelloWorldHandler(response http.ResponseWriter, _ *http.Request) {
 }
 
 func HelloApiHandler(response http.ResponseWriter, _ *http.Request) {
-	apiResponse, err := http.Get(apiUrl + "/api")
+	responseBody, err := sendRequest(apiUrl + "/api")
 	if err != nil {
 		response.WriteHeader(http.StatusInternalServerError)
 		response.Write([]byte(err.Error()))
-		log.Printf("Error caling API: %v", err.Error())
+		log.Printf("Error: %v", err.Error())
 		return
 	}
 
 	response.Write([]byte(fmt.Sprintf("Fetched data from %s\n", apiUrl)))
-
-	body := make([]byte, apiResponse.ContentLength)
-	apiResponse.Body.Read(body)
-
-	var responseBody Response
-	err = json.Unmarshal(body, &responseBody)
-	if err != nil {
-		response.WriteHeader(http.StatusInternalServerError)
-		response.Write([]byte(err.Error()))
-		log.Printf("Error parsing API response: %v", err.Error())
-		return
-	}
-
 	response.Write([]byte(fmt.Sprintf("Hello world!!!\n")))
 	response.Write([]byte(fmt.Sprintf("Response from API: %s\n", responseBody.Message)))
 	log.Print("Handled request")
