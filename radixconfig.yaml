@@ -4,31 +4,50 @@ apiVersion: radix.equinor.com/v1
 kind: RadixApplication
 metadata:
   name: rihag-demo-app
+
 spec:
   environments:
     - name: dev
       build:
-        from: main
-
-  build:
-    useBuildKit: true
+  from: main
 
   components:
     - name: web
-      dockerfileName: web.Dockerfile
       ports:
         - name: http
           port: 8000
       publicPort: http
-      variables:
-        MESSAGE_ENV_VAR: Hello Bergen!
-        API_URL: https://api-rihag-demo-app-dev.playground.radix.equinor.com
-      secrets:
-      - SECRET_ENV_VAR
 
-    - name: api
-      dockerfileName: api.Dockerfile
-      ports:
-        - name: http
-          port: 8001
-      # publicPort: http
+
+#apiVersion: radix.equinor.com/v1
+#kind: RadixApplication
+#metadata:
+#  name: rihag-demo-app
+#spec:
+#  environments:
+#    - name: dev
+#      build:
+#        from: main
+#
+#  build:
+#    useBuildKit: true
+#
+#  components:
+#    - name: web
+#      dockerfileName: web.Dockerfile
+#      ports:
+#        - name: http
+#          port: 8000
+#      publicPort: http
+#      variables:
+#        MESSAGE_ENV_VAR: Hello EDC!
+#        API_URL: https://api-rihag-demo-app-dev.playground.radix.equinor.com
+#      secrets:
+#      - SECRET_ENV_VAR
+#
+#    - name: api
+#      dockerfileName: api.Dockerfile
+#      ports:
+#        - name: http
+#          port: 8001
+#      # publicPort: http
