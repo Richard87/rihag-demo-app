@@ -9,6 +9,7 @@ spec:
   environments:
     - name: dev
       build:
+        from: main
   from: main
 
   components:
