@@ -18,30 +18,12 @@ spec:
         - name: http
           port: 8000
       publicPort: http
+      variables:
+        MESSAGE_ENV_VAR: Hello Bergen
 
 
-#apiVersion: radix.equinor.com/v1
-#kind: RadixApplication
-#metadata:
-#  name: rihag-demo-app
-#spec:
-#  environments:
-#    - name: dev
-#      build:
-#        from: main
-#
-#  build:
-#    useBuildKit: true
-#
-#  components:
-#    - name: web
-#      dockerfileName: web.Dockerfile
-#      ports:
-#        - name: http
-#          port: 8000
-#      publicPort: http
-#      variables:
-#        MESSAGE_ENV_VAR: Hello EDC!
+#region api
+
 #        API_URL: https://api-rihag-demo-app-dev.playground.radix.equinor.com
 #      secrets:
 #      - SECRET_ENV_VAR
@@ -52,3 +34,5 @@ spec:
 #        - name: http
 #          port: 8001
 #      # publicPort: http
+
+#endregion
