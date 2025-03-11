@@ -40,7 +40,7 @@ func HelloWorldHandler(response http.ResponseWriter, _ *http.Request) {
 	response.Write([]byte(fmt.Sprintf("Hello world!!!\n")))
 	response.Write([]byte(fmt.Sprintf("Message: %s\n", message)))
 	response.Write([]byte(fmt.Sprintf("Secret: %s\n", secret)))
-	response.Write([]byte(fmt.Sprintf("\n\nTest API: /api\n")))
+	response.Write([]byte(fmt.Sprintf("\n\nTest API: /test-api\n")))
 
 	log.Print("Handled request")
 }
@@ -54,8 +54,7 @@ func HelloApiHandler(response http.ResponseWriter, _ *http.Request) {
 		return
 	}
 
-	response.Write([]byte(fmt.Sprintf("Fetched data from %s\n", apiUrl)))
-	response.Write([]byte(fmt.Sprintf("Hello world!!!\n")))
-	response.Write([]byte(fmt.Sprintf("Response from API: %s\n", responseBody.Message)))
+	response.Write([]byte(fmt.Sprintf("Fetched data from %s\n\n", apiUrl)))
+	response.Write([]byte(fmt.Sprintf("Response from API: %s\n", responseBody)))
 	log.Print("Handled request")
 }
