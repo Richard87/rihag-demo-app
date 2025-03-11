@@ -20,21 +20,13 @@ spec:
       publicPort: http
       variables:
         MESSAGE_ENV_VAR: Hello Bergen
-#region secret
+        API_URL: https://api-rihag-demo-app-dev.playground.radix.equinor.com
       secrets:
       - SECRET_ENV_VAR
-#endregion
 
-#region api
-
-#        API_URL: https://api-rihag-demo-app-dev.playground.radix.equinor.com
-
-#
-#    - name: api
-#      dockerfileName: api.Dockerfile
-#      ports:
-#        - name: http
-#          port: 8001
-#      # publicPort: http
-
-#endregion
+    - name: api
+      dockerfileName: api.Dockerfile
+      ports:
+        - name: http
+          port: 8001
+      publicPort: http
