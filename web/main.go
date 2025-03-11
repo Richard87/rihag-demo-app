@@ -40,7 +40,7 @@ func HelloWorldHandler(response http.ResponseWriter, _ *http.Request) {
 	response.Write([]byte(fmt.Sprintf("Hello world!!!\n")))
 	response.Write([]byte(fmt.Sprintf("Message: %s\n", message)))
 	response.Write([]byte(fmt.Sprintf("Secret: %s\n", secret)))
-	response.Write([]byte(fmt.Sprintf("\n\nTest API: /api%s\n", secret)))
+	response.Write([]byte(fmt.Sprintf("\n\nTest API: /api\n")))
 
 	log.Print("Handled request")
 }

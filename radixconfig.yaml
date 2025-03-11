@@ -6,6 +6,9 @@ metadata:
   name: rihag-demo-app
 
 spec:
+  build:
+    useBuilderImage: true
+
   environments:
     - name: dev
       build:
