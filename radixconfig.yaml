@@ -32,3 +32,4 @@ spec:
       ports:
         - name: http
           port: 8001
+      publicPort: 8001
