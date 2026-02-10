@@ -13,7 +13,6 @@ spec:
     - name: dev
       build:
         from: main
-  from: main
 
   components:
     - name: web
@@ -21,14 +20,15 @@ spec:
         - name: http
           port: 8000
       publicPort: http
+      
       variables:
         MESSAGE_ENV_VAR: Hello Bergen
         API_URL: https://api-rihag-demo-app-dev.playground.radix.equinor.com
       secrets:
-      - SECRET_ENV_VAR
+        - SECRET_ENV_VAR
 
-    - name: api
-      dockerfileName: api.Dockerfile
-      ports:
-        - name: http
-          port: 8001
+#    - name: api
+#      dockerfileName: api.Dockerfile
+#      ports:
+#        - name: http
+#          port: 8001
