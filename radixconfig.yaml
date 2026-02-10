@@ -24,8 +24,9 @@ spec:
       variables:
         MESSAGE_ENV_VAR: Hello Bergen
         API_URL: https://api-rihag-demo-app-dev.playground.radix.equinor.com
-      secrets:
-        - SECRET_ENV_VAR
+        
+#      secrets:
+#        - SECRET_ENV_VAR
 
 #    - name: api
 #      dockerfileName: api.Dockerfile
